@@ -20,7 +20,7 @@ window.rollDice = () => {
     }
   });
 
-  if (currentPlayer.position === position) {
+  if (currentPlayer.position >= position) {
     hasWon = true;
     alert("You have completed the course!");
   }
