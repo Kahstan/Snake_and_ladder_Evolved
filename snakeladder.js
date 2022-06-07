@@ -24,7 +24,6 @@ window.rollDice = () => {
     hasWon = true;
     alert("You have completed the course!");
   }
-
   actualBoard();
 };
 
@@ -35,7 +34,8 @@ const player = [{ name: "Player1", position: 0, color: "black" }];
 const ladders = [
   { start: 2, end: 24 },
   { start: 50, end: 25 },
-  { start: 26, end: 46 },
+  { start: 26, end: 96 },
+  { start: 86, end: 40 },
 ];
 
 let currentPlayerTurn = 0;
@@ -77,7 +77,6 @@ const actualBoard = () => {
 
   player.forEach((player) => {
     //loop through the player
-    // let square = null;
     board.forEach((row) => {
       //loop through the square
       row.forEach((square) => {
@@ -112,7 +111,7 @@ const actualBoard = () => {
     });
     const isLadder = ladder.end > ladder.start;
     // if the ladder end is bigger than ladder start, color will be red, if not green.
-    drawLine({ color: isLadder ? "green" : "#b28949", startPos, endPos });
+    drawLine({ color: isLadder ? "#b28949" : "green", startPos, endPos });
   });
   document.getElementById("board").innerHTML = actualBoardHTML;
 };
