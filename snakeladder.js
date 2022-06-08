@@ -1,5 +1,5 @@
 //create dice
-let hasWon = false;
+let hasCompleted = false;
 window.rollDice = () => {
   //  //dice with random numbers from 1-6 and displaying the roll number on the html
   roll = Math.ceil(Math.random() * 6);
@@ -15,31 +15,113 @@ window.rollDice = () => {
   // when the player rolls the dice and the ladder position is the same as player position, the player moves to the end of the ladder position
   ladders.forEach((ladder) => {
     if (ladder.start === currentPlayer.position) {
-      console.log("You Stepped On A Snake or Ladder!");
+      console.log("You Stepped On A Ladder!");
       currentPlayer.position = ladder.end;
     }
   });
 
+  snakes.forEach((snake) => {
+    if (snake.start === currentPlayer.position) {
+      console.log("You Stepped On A snake!");
+      currentPlayer.position = snake.end;
+    }
+  });
+
+  //when the player goes out of the board
   if (currentPlayer.position >= position) {
-    hasWon = true;
+    hasCompleted = true;
     alert("You have completed the course!");
   }
   actualBoard();
 };
 
-//add players here.
+//add players here, but requires tweaks
 const player = [{ name: "Player1", position: 0, color: "black" }];
 
-// ladders are both snakes and ladders just different colors.
+// ladders are both snakes and ladders just different colors from canvas
 const ladders = [
-  { start: 2, end: 24 },
-  { start: 50, end: 25 },
-  { start: 26, end: 96 },
-  { start: 86, end: 40 },
+  {
+    start: Math.floor(Math.random() * 110) + 1,
+    end: Math.floor(Math.random() * 110) + 1,
+  },
+  {
+    start: Math.floor(Math.random() * 110) + 1,
+    end: Math.floor(Math.random() * 110) + 1,
+  },
+  {
+    start: Math.floor(Math.random() * 110) + 1,
+    end: Math.floor(Math.random() * 110) + 1,
+  },
+  {
+    start: Math.floor(Math.random() * 110) + 1,
+    end: Math.floor(Math.random() * 110) + 1,
+  },
+  {
+    start: Math.floor(Math.random() * 110) + 1,
+    end: Math.floor(Math.random() * 110) + 1,
+  },
+  {
+    start: Math.floor(Math.random() * 110) + 1,
+    end: Math.floor(Math.random() * 110) + 1,
+  },
+  {
+    start: Math.floor(Math.random() * 110) + 1,
+    end: Math.floor(Math.random() * 110) + 1,
+  },
+  {
+    start: Math.floor(Math.random() * 110) + 1,
+    end: Math.floor(Math.random() * 110) + 1,
+  },
+  {
+    start: Math.floor(Math.random() * 110) + 1,
+    end: Math.floor(Math.random() * 110) + 1,
+  },
+];
+
+const snakes = [
+  {
+    start: Math.floor(Math.random() * 110) + 1,
+    end: Math.floor(Math.random() * 110) + 1,
+  },
+  {
+    start: Math.floor(Math.random() * 110) + 1,
+    end: Math.floor(Math.random() * 110) + 1,
+  },
+  {
+    start: Math.floor(Math.random() * 110) + 1,
+    end: Math.floor(Math.random() * 110) + 1,
+  },
+  {
+    start: Math.floor(Math.random() * 110) + 1,
+    end: Math.floor(Math.random() * 110) + 1,
+  },
+  {
+    start: Math.floor(Math.random() * 110) + 1,
+    end: Math.floor(Math.random() * 110) + 1,
+  },
+  {
+    start: Math.floor(Math.random() * 110) + 1,
+    end: Math.floor(Math.random() * 110) + 1,
+  },
+  {
+    start: Math.floor(Math.random() * 110) + 1,
+    end: Math.floor(Math.random() * 110) + 1,
+  },
+  {
+    start: Math.floor(Math.random() * 110) + 1,
+    end: Math.floor(Math.random() * 110) + 1,
+  },
+  {
+    start: Math.floor(Math.random() * 110) + 1,
+    end: Math.floor(Math.random() * 110) + 1,
+  },
+  {
+    start: Math.floor(Math.random() * 110) + 1,
+    end: Math.floor(Math.random() * 110) + 1,
+  },
 ];
 
 let currentPlayerTurn = 0;
-
 const width = 10;
 const height = 10;
 const board = [];
@@ -78,7 +160,7 @@ const actualBoard = () => {
   player.forEach((player) => {
     //loop through the player
     board.forEach((row) => {
-      //loop through the square
+      //loop through the square and appends it into the board
       row.forEach((square) => {
         if (square.position === player.position) {
           console.log("You are here!", square);
@@ -87,17 +169,16 @@ const actualBoard = () => {
           }px; 
           left:${square.x * boardSizeConst + 5}px; background-color: ${
             player.color
-          }"></div>`; // append it into the board
+          }"></div>`;
         }
       });
     });
   });
-
+  //same as above to figure out where the ladders position to start and end
   ladders.forEach((ladder) => {
     let startPos = { x: 0, y: 0 };
     let endPos = { x: 0, y: 0 };
     board.forEach((row) => {
-      //same as above to figure out where the ladders position to start and end
       row.forEach((square) => {
         if (square.position === ladder.start) {
           startPos.x = square.x * boardSizeConst;
@@ -109,10 +190,33 @@ const actualBoard = () => {
         }
       });
     });
-    const isLadder = ladder.end > ladder.start;
-    // if the ladder end is bigger than ladder start, color will be red, if not green.
-    drawLine({ color: isLadder ? "#b28949" : "green", startPos, endPos });
+    // const isLadder = ladder.end > ladder.start;
+    if (ladder.end > ladder.start) {
+      drawLadder({ color: "#804005", startPos, endPos });
+    }
   });
+
+  snakes.forEach((snake) => {
+    let startPos = { x: 0, y: 0 };
+    let endPos = { x: 0, y: 0 };
+    board.forEach((row) => {
+      row.forEach((square) => {
+        if (square.position === snake.start) {
+          startPos.x = square.x * boardSizeConst;
+          startPos.y = square.y * boardSizeConst;
+        }
+        if (square.position === snake.end) {
+          endPos.x = square.x * boardSizeConst;
+          endPos.y = square.y * boardSizeConst;
+        }
+      });
+    });
+    if (snake.end < snake.start) {
+      drawLine({ color: "green", startPos, endPos });
+    }
+    // if the snake end is bigger than snake start, color will be green, if not brown.
+  });
+
   document.getElementById("board").innerHTML = actualBoardHTML;
 };
 
@@ -121,10 +225,29 @@ function drawLine({ color, startPos, endPos }) {
   var c = document.getElementById("canvas");
   var ctx = c.getContext("2d");
   ctx.beginPath();
+  ctx.arc(startPos.x + 25, startPos.y + 25, 5, 0, 2 * Math.PI);
   ctx.moveTo(startPos.x + 25, startPos.y + 25);
   ctx.lineTo(endPos.x + 25, endPos.y + 25);
+  ctx.fillStyle = "green";
+  ctx.fill();
+  ctx.setLineDash([40, 1]);
   ctx.lineWidth = 15;
   ctx.strokeStyle = color;
   ctx.stroke();
 }
+
+function drawLadder({ color, startPos, endPos }) {
+  var c = document.getElementById("canvas");
+  var ctx = c.getContext("2d");
+  ctx.beginPath();
+  ctx.moveTo(startPos.x + 25, startPos.y + 25);
+  ctx.lineTo(endPos.x + 25, endPos.y + 25);
+  ctx.fill();
+  ctx.setLineDash([15, 3]);
+  ctx.lineWidth = 30;
+  ctx.strokeStyle = color;
+  ctx.stroke();
+}
 actualBoard();
+
+//create 2 functions, 1 for ladders and 1 for snake.
