@@ -1,4 +1,4 @@
-SnakeS & LadderS
+<b>SnakeS & LadderS</b>
 
 SnakeS & LadderS is a classic board game loved by children and adults. This game consist of 100 tiles and player will have to get through the obstacles to reach the end. Snakes are represented by green lines and Ladders are represented by brown broken lines.
 
