@@ -12,7 +12,8 @@ HTML, CSS, JAVASCRIPT
 
 Known Problems
 
-As ladders and snakes are randomized, there are invisible snakes still appearing in the
+Snakes and ladders wont appear if they did not satisfy the conditions. I have made another condition by displacing the player to "miss" those invisible ladders and snakes
 
 Future Works
+
 how can others contribution
