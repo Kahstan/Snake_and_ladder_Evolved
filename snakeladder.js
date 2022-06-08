@@ -26,17 +26,25 @@ window.rollDice = () => {
       currentPlayer.position = snake.end;
     }
   });
-
   //when the player goes out of the board
   if (currentPlayer.position >= position) {
     hasCompleted = true;
-    alert("You have completed the course!");
+    alert(
+      `${player[currentPlayerTurn].name} has won!!!! Press restart to start a new game.`
+    );
+  }
+  currentPlayerTurn++;
+  if (currentPlayerTurn >= player.length) {
+    currentPlayerTurn = 0;
   }
   actualBoard();
 };
 
 //add players here, but requires tweaks
-const player = [{ name: "Player1", position: 0, color: "black" }];
+const player = [
+  { name: "Player1", position: 0, color: "black" },
+  { name: "Player2", position: 0, color: "white" },
+];
 
 // ladders are both snakes and ladders just different colors from canvas
 const ladders = [

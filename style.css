@@ -16,7 +16,7 @@ body {
   position: absolute;
   width: 50px;
   height: 50px;
-  background-image: url(/nature-texture-stone-wall-with-greenery.jpg);
+  background-image: url(/texture-grass-field.jpg);
   background-position: center;
   background-size: cover;
   border: 1px solid;
@@ -56,14 +56,15 @@ body {
 }
 
 button {
-  background-color: black;
+  background-color: white;
   border-radius: 6px;
   border: 1px solid black;
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   padding: 10px;
   text-transform: uppercase;
   width: 165px;
   cursor: pointer;
+  opacity: 0.8;
 }
 
 li {
