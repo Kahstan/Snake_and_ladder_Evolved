@@ -14,15 +14,15 @@ window.rollDice = () => {
   };
   // when the player rolls the dice and the ladder position is the same as player position, the player moves to the end of the ladder position
   ladders.forEach((ladder) => {
-    if (ladder.start === currentPlayer.position) {
-      console.log("You Stepped On A Ladder!");
+    if (ladder.start === currentPlayer.position && ladder.end > ladder.start) {
+      console.log("You Stepped On A Ladder! Wooo!! ");
       currentPlayer.position = ladder.end;
     }
   });
 
   snakes.forEach((snake) => {
-    if (snake.start === currentPlayer.position) {
-      console.log("You Stepped On A snake!");
+    if (snake.start === currentPlayer.position && snake.end < snake.start) {
+      console.log("You Stepped On A Snake! Bye!! ");
       currentPlayer.position = snake.end;
     }
   });
@@ -190,7 +190,7 @@ const actualBoard = () => {
         }
       });
     });
-    // const isLadder = ladder.end > ladder.start;
+
     if (ladder.end > ladder.start) {
       drawLadder({ color: "#804005", startPos, endPos });
     }
@@ -214,7 +214,7 @@ const actualBoard = () => {
     if (snake.end < snake.start) {
       drawLine({ color: "green", startPos, endPos });
     }
-    // if the snake end is bigger than snake start, color will be green, if not brown.
+    // there are invisible snakes and ladders in the console that still draws even when the condition is not met
   });
 
   document.getElementById("board").innerHTML = actualBoardHTML;
@@ -224,15 +224,23 @@ const actualBoard = () => {
 function drawLine({ color, startPos, endPos }) {
   var c = document.getElementById("canvas");
   var ctx = c.getContext("2d");
+  var grd = ctx.createLinearGradient(0, 0, 500, 0);
+  grd.addColorStop(0, "yellow");
+  grd.addColorStop(0.2, "green");
+  grd.addColorStop(0.4, "yellow");
+  grd.addColorStop(0.6, "green");
+  grd.addColorStop(0.8, "yellow");
+  grd.addColorStop(0.9, "green");
+  grd.addColorStop(1, "yellow");
   ctx.beginPath();
   ctx.arc(startPos.x + 25, startPos.y + 25, 5, 0, 2 * Math.PI);
   ctx.moveTo(startPos.x + 25, startPos.y + 25);
   ctx.lineTo(endPos.x + 25, endPos.y + 25);
-  ctx.fillStyle = "green";
+  ctx.fillStyle = grd;
   ctx.fill();
   ctx.setLineDash([40, 1]);
   ctx.lineWidth = 15;
-  ctx.strokeStyle = color;
+  ctx.strokeStyle = grd;
   ctx.stroke();
 }
 
@@ -251,3 +259,4 @@ function drawLadder({ color, startPos, endPos }) {
 actualBoard();
 
 //create 2 functions, 1 for ladders and 1 for snake.
+//can always make a teleportation to teleport the player around the map. alternative
