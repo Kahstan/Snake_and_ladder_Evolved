@@ -1,5 +1,6 @@
 let name1 = prompt("Your Name Here!");
 let name2 = prompt("Your Opponent's Name?");
+
 //create dice
 let hasCompleted = false;
 window.rollDice = () => {
@@ -17,14 +18,14 @@ window.rollDice = () => {
   // when the player rolls the dice and the ladder position is the same as player position, the player moves to the end of the ladder position
   ladders.forEach((ladder) => {
     if (ladder.start === currentPlayer.position && ladder.end > ladder.start) {
-      console.log("You Stepped On A Ladder! Wooo!! ");
+      console.log("You Stepped On A Ladder! Wooo! ");
       currentPlayer.position = ladder.end;
     }
   });
 
   snakes.forEach((snake) => {
     if (snake.start === currentPlayer.position && snake.end < snake.start) {
-      console.log("You Stepped On A Snake! Bye!! ");
+      console.log("You Stepped On A Snake! Bye! ");
       currentPlayer.position = snake.end;
     }
   });
@@ -32,7 +33,7 @@ window.rollDice = () => {
   if (currentPlayer.position >= position) {
     hasCompleted = true;
     alert(
-      `${player[currentPlayerTurn].name} has won!!!! Press restart to start a new game.`
+      `Congratulations ${player[currentPlayerTurn].name}, You have won! Press restart to start a new game.`
     );
   }
   currentPlayerTurn++;
