@@ -1,3 +1,5 @@
+let name1 = prompt("Your Name Here!");
+let name2 = prompt("Your Opponent's Name?");
 //create dice
 let hasCompleted = false;
 window.rollDice = () => {
@@ -42,8 +44,8 @@ window.rollDice = () => {
 
 //add players here, but requires tweaks
 const player = [
-  { name: "Player1", position: 0, color: "black" },
-  { name: "Player2", position: 0, color: "white" },
+  { name: name1, position: 0, color: "black" },
+  { name: name2, position: 0, color: "white" },
 ];
 
 // ladders are both snakes and ladders just different colors from canvas
