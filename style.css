@@ -4,6 +4,7 @@ body {
   background-position: center;
   background-repeat: repeat-y;
   background-size: cover;
+  max-width: 100%;
 }
 
 #board {
