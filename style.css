@@ -63,21 +63,31 @@ button {
   color: rgb(0, 0, 0);
   padding: 10px;
   text-transform: uppercase;
-  width: 165px;
+  width: 172px;
   cursor: pointer;
   opacity: 0.8;
 }
 
 li {
-  width: 180px;
+  width: 160px;
   list-style: none;
-  text-align: left;
+  text-align: center;
   margin: 5px;
-  height: 30px;
+  height: 34px;
   font-size: smaller;
 }
 
 #readMe {
+  margin-top: 5px;
   text-align: center;
-  width: 180px;
+  width: 170px;
+  background-color: white;
+  opacity: 0.8;
+  border: 1px solid black;
+  border-radius: 6px;
+}
+
+#head {
+  padding-top: 10px;
+  text-align: center;
 }

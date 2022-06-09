@@ -249,7 +249,7 @@ function drawLine({ color, startPos, endPos }) {
   ctx.lineTo(endPos.x + 25, endPos.y + 25);
   ctx.fillStyle = grd;
   ctx.fill();
-  ctx.setLineDash([40, 1]);
+  ctx.setLineDash([40, 1.5]);
   ctx.lineWidth = 15;
   ctx.strokeStyle = grd;
   ctx.stroke();
