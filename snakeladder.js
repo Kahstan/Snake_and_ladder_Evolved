@@ -3,59 +3,11 @@ let name2 = prompt("Your Opponent's Name?");
 var diceRollAudio = new Audio("roll.wav");
 var stepAudio = new Audio("steps.wav");
 var slideAudio = new Audio("slide.wav");
-
-//create dice
 let hasCompleted = false;
-window.rollDice = () => {
-  //  //dice with random numbers from 1-6 and displaying the roll number on the html
-  roll = Math.ceil(Math.random() * 6);
-  let displayNum = document.querySelector("#diceNum");
-  displayNum.innerHTML = roll;
-  //adds the number to player's position.
-  let currentPlayer = player[currentPlayerTurn];
-  currentPlayer.position += roll;
-  //restart button that reloads the game
-  window.gameReset = () => {
-    location.reload();
-  };
-  // when the player rolls the dice and the ladder position is the same as player position, the player moves to the end of the ladder position
-  ladders.forEach((ladder) => {
-    if (ladder.start === currentPlayer.position && ladder.end > ladder.start) {
-      console.log("You Stepped On A Ladder! Wooo! ");
-      currentPlayer.position = ladder.end;
-      stepAudio.play();
-    }
-  });
-
-  snakes.forEach((snake) => {
-    if (snake.start === currentPlayer.position && snake.end < snake.start) {
-      console.log("You Stepped On A Snake! Bye! ");
-      currentPlayer.position = snake.end;
-      slideAudio.play();
-    }
-  });
-  //when the player goes out of the board
-  if (currentPlayer.position >= position) {
-    hasCompleted = true;
-    alert(
-      `Congratulations ${player[currentPlayerTurn].name}, You have won! Press restart to start a new game.`
-    );
-  }
-  currentPlayerTurn++;
-  if (currentPlayerTurn >= player.length) {
-    currentPlayerTurn = 0;
-  }
-  actualBoard();
-  diceRollAudio.play();
-};
-
-//add players here, but requires tweaks
 const player = [
   { name: name1, position: 0, color: "black" },
   { name: name2, position: 0, color: "white" },
 ];
-
-// ladders are both snakes and ladders just different colors from canvas
 const ladders = [
   {
     start: Math.floor(Math.random() * 110) + 1,
@@ -143,6 +95,51 @@ const width = 10;
 const height = 10;
 const board = [];
 let position = 0; //everytime you start the loop, the increment starts from 0
+let boardSizeConst = 50;
+
+//create dice
+window.rollDice = () => {
+  //  //dice with random numbers from 1-6 and displaying the roll number on the html
+  roll = Math.ceil(Math.random() * 6);
+  let displayNum = document.querySelector("#diceNum");
+  displayNum.innerHTML = roll;
+  //adds the number to player's position.
+  let currentPlayer = player[currentPlayerTurn];
+  currentPlayer.position += roll;
+  //restart button that reloads the game
+  window.gameReset = () => {
+    location.reload();
+  };
+  // when the player rolls the dice and the ladder position is the same as player position, the player moves to the end of the ladder position
+  ladders.forEach((ladder) => {
+    if (ladder.start === currentPlayer.position && ladder.end > ladder.start) {
+      console.log("You Stepped On A Ladder! Wooo! ");
+      currentPlayer.position = ladder.end;
+      stepAudio.play();
+    }
+  });
+
+  snakes.forEach((snake) => {
+    if (snake.start === currentPlayer.position && snake.end < snake.start) {
+      console.log("You Stepped On A Snake! Bye! ");
+      currentPlayer.position = snake.end;
+      slideAudio.play();
+    }
+  });
+  //when the player goes out of the board
+  if (currentPlayer.position >= position) {
+    hasCompleted = true;
+    alert(
+      `Congratulations ${player[currentPlayerTurn].name}, You have won! Press restart to start a new game.`
+    );
+  }
+  currentPlayerTurn++;
+  if (currentPlayerTurn >= player.length) {
+    currentPlayerTurn = 0;
+  }
+  actualBoard();
+  diceRollAudio.play();
+};
 
 // to reverse engineer the process by starting at bottom left, x and y to represent x and y on the board
 for (let y = height; y >= 0; y--) {
@@ -157,8 +154,6 @@ for (let y = height; y >= 0; y--) {
     position++;
   }
 }
-
-let boardSizeConst = 50;
 
 //loop through the board and create the board
 const actualBoard = () => {
@@ -260,7 +255,7 @@ function drawLine({ color, startPos, endPos }) {
   ctx.strokeStyle = grd;
   ctx.stroke();
 }
-
+//drawing the ladder
 function drawLadder({ color, startPos, endPos }) {
   var c = document.getElementById("canvas");
   var ctx = c.getContext("2d");
@@ -274,6 +269,3 @@ function drawLadder({ color, startPos, endPos }) {
   ctx.stroke();
 }
 actualBoard();
-
-//create 2 functions, 1 for ladders and 1 for snake.
-//can always make a teleportation to teleport the player around the map. alternative
