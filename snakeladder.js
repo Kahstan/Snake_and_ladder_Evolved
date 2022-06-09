@@ -1,5 +1,8 @@
 let name1 = prompt("Your Name Here!");
 let name2 = prompt("Your Opponent's Name?");
+var diceRollAudio = new Audio("roll.wav");
+var stepAudio = new Audio("steps.wav");
+var slideAudio = new Audio("slide.wav");
 
 //create dice
 let hasCompleted = false;
@@ -20,6 +23,7 @@ window.rollDice = () => {
     if (ladder.start === currentPlayer.position && ladder.end > ladder.start) {
       console.log("You Stepped On A Ladder! Wooo! ");
       currentPlayer.position = ladder.end;
+      stepAudio.play();
     }
   });
 
@@ -27,6 +31,7 @@ window.rollDice = () => {
     if (snake.start === currentPlayer.position && snake.end < snake.start) {
       console.log("You Stepped On A Snake! Bye! ");
       currentPlayer.position = snake.end;
+      slideAudio.play();
     }
   });
   //when the player goes out of the board
@@ -41,6 +46,7 @@ window.rollDice = () => {
     currentPlayerTurn = 0;
   }
   actualBoard();
+  diceRollAudio.play();
 };
 
 //add players here, but requires tweaks
