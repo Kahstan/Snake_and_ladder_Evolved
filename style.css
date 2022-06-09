@@ -1,6 +1,6 @@
 body {
   font-family: "Roboto", sans-serif;
-  background-image: url(./img/Background.jpg);
+  background-image: url(./Background.jpg);
   background-position: center;
   background-repeat: repeat-y;
   background-size: cover;
@@ -17,7 +17,7 @@ body {
   position: absolute;
   width: 50px;
   height: 50px;
-  background-image: url(./img/Grass.jpg);
+  background-image: url(./Grass.jpg);
   background-position: center;
   background-size: cover;
   border: 1px solid;
