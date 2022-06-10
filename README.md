@@ -4,7 +4,9 @@ https://snakesandladdersevolved.netlify.app/
 
 Snakes & Ladders is a classic board game loved by children and adults. This game consist of 100 tiles and player will have to get through the obstacles to reach the end. Snakes are represented by green lines and Ladders are represented by brown broken lines.
 
-This is an evolved version which will be more challenging with snakes and ladders randomly appearing on different board tiles whenever you do a refresh or when you restart the game.
+This is an evolved version which will be more challenging with snakes and ladders randomly appearing on different board tiles whenever you do a refresh or when you restart the game. No single game will be the same.
+
+This game challenges the classical board game and puts a challenging touch to it.
 
 This game is kids friendly.
 

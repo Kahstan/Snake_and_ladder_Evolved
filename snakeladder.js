@@ -224,9 +224,8 @@ const actualBoard = () => {
       });
     });
     if (snake.end < snake.start) {
-      drawLine({ color: "green", startPos, endPos });
+      drawLine({ color: "white", startPos, endPos });
     }
-    // there are invisible snakes and ladders in the console that still draws even when the condition is not met
   });
 
   document.getElementById("board").innerHTML = actualBoardHTML;
